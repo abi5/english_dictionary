@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from django.contrib import messages
+from English_Dictionary import settings
+from django.core.mail import send_mail
 
 from django.contrib.auth import authenticate, login, logout
 # Create your views here.
@@ -40,6 +42,11 @@ def login_page(request):
 
 
 def mainpage(request):
+    subject = 'welcome to GFG world'
+    message = f'Hi thank you for registering in geeksforgeeks.'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = ['keerthangowda8318@gmail.com',]
+    send_mail(subject, message, email_from, recipient_list)
     return render(request, 'Dict/mainpage.html')
 
 def logout(request):
